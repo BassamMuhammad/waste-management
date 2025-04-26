@@ -9,13 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/core": "^7.17.4",
+    "@mantine/hooks": "^7.17.4",
+    "@mantine/notifications": "^7.17.5",
+    "@tabler/icons-react": "^3.31.0",
+    "firebase": "^11.6.1",
+    "leaflet": "^1.9.4",
+    "leaflet-defaulticon-compatibility": "^0.1.2",
+    "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.1"
+    "react-leaflet": "^5.0.0-rc.2",
+    "react-webcam": "^7.2.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
-    "@eslint/eslintrc": "^3"
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1"
   }
 }
