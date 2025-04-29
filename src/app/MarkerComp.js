@@ -114,11 +114,18 @@ export const MarkerComp = ({ markers, setMarkers }) => {
               </Button>
             </>
           ) : (
-            timings[i]?.map((time, index) => (
-              <Text key={index}>
-                {index + 1}) {time}
-              </Text>
-            ))
+            <>
+              {timings[i]?.length > 0 && (
+                <Text fw="bold" c="blue">
+                  Timing
+                </Text>
+              )}
+              {timings[i]?.map((time, index) => (
+                <Text key={index}>
+                  {index + 1}) {time}
+                </Text>
+              ))}
+            </>
           )}
         </Popup>
       </Marker>
