@@ -13,11 +13,7 @@ export default function TrashRecycle() {
       collection(firestore, "recyclingPoints"),
       (snapshot) => {
         const markers = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            position: data.position,
-            timing: data.timing,
-          };
+          return doc.data();
         });
         setMarkers(markers);
       }

@@ -56,7 +56,9 @@ export const MarkerComp = ({ markers, setMarkers }) => {
     marker.isStartingPoint ? (
       <FeatureGroup key={JSON.stringify(marker.position)}>
         <Popup>
-            <Text fw="bold">Starting Point</Text>
+          <Text fw="bold" c="blue">
+            Starting Point
+          </Text>
         </Popup>
         <Circle center={marker.position} radius={200} />
       </FeatureGroup>
