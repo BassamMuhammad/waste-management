@@ -4,7 +4,6 @@ import { CardComp } from "./CardComp";
 import { LoginComp } from "./LoginComp";
 import trashOverflowImg from "../../public/trash-overflow.png";
 import trashRecycleImg from "../../public/trash-recycle.png";
-import trashScheduleImg from "../../public/trash-schedule.png";
 
 export default function Home() {
   const tabsValues = [
