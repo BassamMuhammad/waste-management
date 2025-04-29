@@ -1,11 +1,28 @@
 import { Container, Tabs, TabsList, TabsTab, TabsPanel } from "@mantine/core";
 import { IconBuilding, IconUser } from "@tabler/icons-react";
-import { UserComp } from "./UserComp";
+import { CardComp } from "./CardComp";
+import { LoginComp } from "./LoginComp";
+import trashOverflowImg from "../../public/trash-overflow.png";
+import trashRecycleImg from "../../public/trash-recycle.png";
+import trashScheduleImg from "../../public/trash-schedule.png";
 
 export default function Home() {
   const tabsValues = [
     { name: "user", icon: <IconUser size={18} /> },
     { name: "admin", icon: <IconBuilding size={18} /> },
+  ];
+
+  const userOptions = [
+    {
+      option: "Report Overflow",
+      img: trashOverflowImg,
+      navigateUrl: "/report-overflow",
+    },
+    {
+      option: "Find Nearest Recycling Point",
+      img: trashRecycleImg,
+      navigateUrl: "/trash-recycle",
+    },
   ];
 
   return (
@@ -26,7 +43,10 @@ export default function Home() {
           ))}
         </TabsList>
         <TabsPanel value={tabsValues[0].name}>
-          <UserComp />
+          <CardComp data={userOptions} />
+        </TabsPanel>
+        <TabsPanel value={tabsValues[1].name}>
+          <LoginComp />
         </TabsPanel>
       </Tabs>
     </Container>

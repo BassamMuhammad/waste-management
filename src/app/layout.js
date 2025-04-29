@@ -1,5 +1,6 @@
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
+import "@mantine/charts/styles.css";
 import {
   ColorSchemeScript,
   MantineProvider,
@@ -20,7 +21,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <MantineProvider>
-          <Notifications />
+          <Notifications zIndex={10000} />
           {children}
         </MantineProvider>
       </body>
