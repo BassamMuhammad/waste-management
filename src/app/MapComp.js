@@ -18,13 +18,18 @@ import { MarkerComp } from "./MarkerComp";
 import { useEffect } from "react";
 
 function ChangeView({ updateMap, setUpdateMap, center, zoom }) {
-  if (updateMap) {
-    const map = useMap();
-    map.setView(center, zoom);
-    setTimeout(() => {
-      setUpdateMap(false);
-    }, 10);
-  }
+  const map = useMap();
+
+  useEffect(() => {
+    if (updateMap) {
+      if (!map) return;
+      map.setView(center, zoom);
+      setTimeout(() => {
+        setUpdateMap(false);
+      }, 10);
+    }
+  }, [updateMap, map]);
+
   return null;
 }
 
