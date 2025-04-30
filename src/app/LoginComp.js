@@ -5,6 +5,7 @@ import {
   Card,
   Container,
   LoadingOverlay,
+  PasswordInput,
   TextInput,
 } from "@mantine/core";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
@@ -12,10 +13,12 @@ import { useEffect, useState } from "react";
 import { auth } from "./firebase";
 import { notifications } from "@mantine/notifications";
 import { useRouter } from "next/navigation";
+import { IconEye, IconEyeOff } from "@tabler/icons-react";
 
 export function LoginComp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@gmail.com");
+  const [password, setPassword] = useState("12345678");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -69,12 +72,31 @@ export function LoginComp() {
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
         />
-        <TextInput
+        <PasswordInput
           label="Password"
           placeholder="Password"
           required
+          visible={showPassword}
+          onVisibilityChange={setShowPassword}
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
+          rightSection={
+            !showPassword ? (
+              <IconEye
+                color="blue"
+                style={{ cursor: "pointer" }}
+                size={24}
+                onClick={() => setShowPassword(true)}
+              />
+            ) : (
+              <IconEyeOff
+                color="blue"
+                style={{ cursor: "pointer" }}
+                size={24}
+                onClick={() => setShowPassword(false)}
+              />
+            )
+          }
         />
         <Button onClick={onLogin}>Login</Button>
       </Card>
