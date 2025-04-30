@@ -34,14 +34,14 @@ export default function Admin() {
     setLoading(true);
     fetch("https://waste-management-drab.vercel.app/api/create-route")
       .then(() => {
-        setLoading(false);
-        setTimeout(() => {
-          notifications.show({
-            title: "Success",
-            message: "Route generated successfully",
-            color: "green",
-          });
-        }, 3000);
+          setTimeout(() => {
+            setLoading(false);
+            notifications.show({
+              title: "Success",
+              message: "Route generated successfully",
+              color: "green",
+            });
+          }, 3000);
       })
       .catch(() => {
         setLoading(false);
