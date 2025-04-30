@@ -18,7 +18,7 @@ export default function Home() {
       navigateUrl: "/report-overflow",
     },
     {
-      option: "Find Nearest Recycling Point",
+      option: "Find Nearest Collection Point",
       img: trashRecycleImg,
       navigateUrl: "/trash-recycle",
     },

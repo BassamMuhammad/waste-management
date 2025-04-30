@@ -12,7 +12,7 @@ import { notifications } from "@mantine/notifications";
 export default function Admin() {
   const adminOptions = [
     {
-      option: "Update Recycling Point",
+      option: "Update Collection Point",
       img: trashRecycleImg,
       navigateUrl: "/admin/update-recycle",
     },

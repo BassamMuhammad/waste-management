@@ -48,7 +48,7 @@ export function MapCompLocMark({ initialMarkers, markers, setMarkers, polyline }
       if (markers.length === 0) {
         notifications.show({
           title: "Error",
-          message: "Please add at least one recycling point",
+          message: "Please add at least one collection point",
           color: "red",
         });
         return;
@@ -70,14 +70,15 @@ export function MapCompLocMark({ initialMarkers, markers, setMarkers, polyline }
         batch.set(docRef, {
           position: marker.position,
           timing: marker.timing,
-          isBinFull: true,
+          isBinFull: marker.isBinFull,
+          isStartingPoint: marker.isStartingPoint,
         });
       });
       await batch.commit();
       setLoading(false);
       notifications.show({
         title: "Success",
-        message: "Recycling points saved successfully",
+        message: "Collection points saved successfully",
         color: "green",
       });
     } catch (error) {
