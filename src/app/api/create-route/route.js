@@ -8,7 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 
-export function GET(request) {
+export async function GET(request) {
   function distance(p1, p2) {
     const dx = p1[0] - p2[0];
     const dy = p1[1] - p2[1];
@@ -18,7 +18,7 @@ export function GET(request) {
   function findShortestPath(points, currentIndex) {
     const visited = new Array(points.length).fill(false);
     const path = [];
-    
+
     path.push(points[currentIndex]);
     visited[currentIndex] = true;
 
@@ -49,29 +49,22 @@ export function GET(request) {
     where("isBinFull", "==", true)
   );
   let coordinates = [];
-  let startingIndex = - 1
-  getDocs(q)
-    .then((querySnapshot) => {
-      coordinates = querySnapshot.docs.map((doc, i) => {
-        const data = doc.data();
-        if (data.isStartingPoint) startingIndex = i;
-        return data.position;
-      });
-      const shortestPath = findShortestPath(coordinates, startingIndex);
-      setDoc(doc(firestore, "pickupRoute", "route"), {
-        route: shortestPath.toString(),
-      })
-        .then(() => {
-          console.log("Route created");
-          return new Response("Route created");
-        })
-        .catch((error) => {
-          console.error("Error saving shortest path to Firestore:", error);
-          return new Response("Error occured");
-        });
-    })
-    .catch((error) => {
-      console.error("Error fetching recycling points:", error);
-      return new Response("Error occured");
+  let startingIndex = -1;
+  try {
+    const querySnapshot = await getDocs(q);
+    coordinates = querySnapshot.docs.map((doc, i) => {
+      const data = doc.data();
+      if (data.isStartingPoint) startingIndex = i;
+      return data.position;
     });
+    const shortestPath = findShortestPath(coordinates, startingIndex);
+    await setDoc(doc(firestore, "pickupRoute", "route"), {
+      route: shortestPath.toString(),
+    });
+    console.log("Route created");
+    return new Response("Route created");
+  } catch (error) {
+    console.error("Error saving shortest path to Firestore:", error);
+    return new Response("Error occured");
+  }
 }
