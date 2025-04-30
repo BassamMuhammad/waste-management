@@ -8,6 +8,7 @@ import { Button, Group, LoadingOverlay } from "@mantine/core";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { notifications } from "@mantine/notifications";
+import { useState } from "react";
 
 export default function Admin() {
     const [loading, setLoading] = useState(false)
