@@ -70,8 +70,8 @@ export function MapCompLocMark({ initialMarkers, markers, setMarkers, polyline }
         batch.set(docRef, {
           position: marker.position,
           timing: marker.timing,
-          isBinFull: marker.isBinFull,
-          isStartingPoint: marker.isStartingPoint,
+          isBinFull: marker.isBinFull ?? true,
+          isStartingPoint: marker.isStartingPoint ?? false,
         });
       });
       await batch.commit();

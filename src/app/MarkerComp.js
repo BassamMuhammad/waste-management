@@ -25,7 +25,7 @@ export const MarkerComp = ({ markers, setMarkers }) => {
     const newMarker = {
       position: [lat, lng],
       timing: [],
-      isBinFull: false,
+      isBinFull: true,
     };
     if (
       tempMarkers.findIndex(
