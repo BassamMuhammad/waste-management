@@ -4,12 +4,13 @@ import { CardComp } from "../CardComp";
 import trashRecycleImg from "../../../public/trash-recycle.png";
 import pickupRouteImg from "../../../public/pickup-route.png";
 import statsImg from "../../../public/stats.png";
-import { Button, Group } from "@mantine/core";
+import { Button, Group, LoadingOverlay } from "@mantine/core";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { notifications } from "@mantine/notifications";
 
 export default function Admin() {
+    const [loading, setLoading] = useState(false)
   const adminOptions = [
     {
       option: "Update Collection Point",
@@ -29,15 +30,20 @@ export default function Admin() {
   ];
 
   const generateRoute = () => {
+    setLoading(true);
     fetch("https://waste-management-drab.vercel.app/api/create-route")
       .then(() => {
-        notifications.show({
-          title: "Success",
-          message: "Route generated successfully",
-          color: "green",
-        });
+        setLoading(false);
+        setTimeout(() => {
+          notifications.show({
+            title: "Success",
+            message: "Route generated successfully",
+            color: "green",
+          });
+        }, 3000);
       })
       .catch(() => {
+        setLoading(false);
         notifications.show({
           title: "Error",
           message: "Error occurred. Please try again",
@@ -57,6 +63,7 @@ export default function Admin() {
           Logout
         </Button>
       </Group>
+      <LoadingOverlay visible={loading} />
     </>
   );
 }

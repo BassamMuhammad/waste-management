@@ -53,7 +53,7 @@ export function GET(request) {
   getDocs(q).then((querySnapshot) => {
     coordinates = querySnapshot.docs.map((doc, i) => {
       const data = doc.data();
-      if(data.isStartingPoint) startingIndex = i
+      if (data.isStartingPoint) startingIndex = i;
       return data.position;
     });
     const shortestPath = findShortestPath(coordinates, startingIndex);
@@ -62,11 +62,11 @@ export function GET(request) {
     })
       .then(() => {
         console.log("Route created");
+        return new Response("Route created");
       })
       .catch((error) => {
         console.error("Error saving shortest path to Firestore:", error);
       });
   });
 
-  return new Response("Route created");
 }
