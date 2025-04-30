@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { firestore } from "@/app/firebase";
 import { MapCompLocMark } from "@/app/MapCompLocMark";
 import { LoadingOverlay } from "@mantine/core";
@@ -52,8 +58,7 @@ export default function PickupRoute() {
       }
     };
   }, []);
-
-  if (!line.length) return <LoadingOverlay visible={true} />;
+  if (!line.length) return <LoadingOverlay visible={loading} />;
 
   return <MapCompLocMark markers={markers} polyline={line} />;
 }

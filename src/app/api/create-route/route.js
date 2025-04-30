@@ -50,23 +50,28 @@ export function GET(request) {
   );
   let coordinates = [];
   let startingIndex = - 1
-  getDocs(q).then((querySnapshot) => {
-    coordinates = querySnapshot.docs.map((doc, i) => {
-      const data = doc.data();
-      if (data.isStartingPoint) startingIndex = i;
-      return data.position;
-    });
-    const shortestPath = findShortestPath(coordinates, startingIndex);
-    setDoc(doc(firestore, "pickupRoute", "route"), {
-      route: shortestPath.toString(),
-    })
-      .then(() => {
-        console.log("Route created");
-        return new Response("Route created");
-      })
-      .catch((error) => {
-        console.error("Error saving shortest path to Firestore:", error);
+  getDocs(q)
+    .then((querySnapshot) => {
+      coordinates = querySnapshot.docs.map((doc, i) => {
+        const data = doc.data();
+        if (data.isStartingPoint) startingIndex = i;
+        return data.position;
       });
-  });
-
+      const shortestPath = findShortestPath(coordinates, startingIndex);
+      setDoc(doc(firestore, "pickupRoute", "route"), {
+        route: shortestPath.toString(),
+      })
+        .then(() => {
+          console.log("Route created");
+          return new Response("Route created");
+        })
+        .catch((error) => {
+          console.error("Error saving shortest path to Firestore:", error);
+          return new Response("Error occured");
+        });
+    })
+    .catch((error) => {
+      console.error("Error fetching recycling points:", error);
+      return new Response("Error occured");
+    });
 }
